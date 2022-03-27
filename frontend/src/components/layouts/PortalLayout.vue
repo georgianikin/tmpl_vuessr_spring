@@ -52,7 +52,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'bootstrap/scss/bootstrap.scss';
 @import url('../../assets/css/portal.css');
 
 </style>
