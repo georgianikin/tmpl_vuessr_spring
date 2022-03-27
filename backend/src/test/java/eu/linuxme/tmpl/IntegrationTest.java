@@ -1,6 +1,6 @@
 package eu.linuxme.tmpl;
 
-import eu.linuxme.tmpl.BackendApp;
+import eu.linuxme.tmpl.TmplBackendApp;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,6 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(classes = BackendApp.class)
+@SpringBootTest(classes = TmplBackendApp.class)
 public @interface IntegrationTest {
 }

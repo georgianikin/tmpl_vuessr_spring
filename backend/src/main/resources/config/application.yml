@@ -14,29 +14,47 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+
+# MYBATIS CONFIG
+mybatis:
+    mapper-locations: classpath:eu/linuxme/tmpl/mapper/*.xml
+        
+---
+# Conditionally disable springdoc on missing api-docs profile
+spring:
+  config:
+    activate:
+      on-profile: '!api-docs'
+springdoc:
+  api-docs:
+    enabled: false
+---
 management:
   endpoints:
     web:
       base-path: /management
       exposure:
-        include: ['configprops', 'env', 'health', 'info', 'jhimetrics', 'logfile', 'loggers', 'prometheus', 'threaddump', 'caches']
+        include:
+          ['configprops', 'env', 'health', 'info', 'jhimetrics', 'jhiopenapigroups', 'logfile', 'loggers', 'prometheus', 'threaddump']
   endpoint:
     health:
       show-details: when_authorized
       roles: 'ROLE_ADMIN'
       probes:
         enabled: true
+      group:
+        liveness:
+          include: livenessState
+        readiness:
+          include: readinessState
     jhimetrics:
       enabled: true
   info:
     git:
       mode: full
+    env:
+      enabled: true
   health:
-    group:
-      liveness:
-        include: livenessState
-      readiness:
-        include: readinessState
     mail:
       enabled: false # When using the MailService, configure an SMTP server and set this to true
   metrics:
@@ -64,9 +82,10 @@ management:
           autotime:
             enabled: true
 
+        
 spring:
   application:
-    name: backend
+    name: tmpl_backend
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -84,6 +103,10 @@ spring:
     basename: i18n/messages
   main:
     allow-bean-definition-overriding: true
+    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   security:
     user:
       name: admin
@@ -93,13 +116,13 @@ spring:
         - USER
   task:
     execution:
-      thread-name-prefix: backend-task-
+      thread-name-prefix: tmpl-backend-task-
       pool:
         core-size: 2
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: backend-scheduling-
+      thread-name-prefix: tmpl-backend-scheduling-
       pool:
         size: 2
   thymeleaf:
@@ -114,6 +137,9 @@ server:
       cookie:
         http-only: true
 
+springdoc:
+  show-actuator: true
+
 # Properties to be exposed on the /info management endpoint
 info:
   # Comma separated list of profiles that will trigger the ribbon to show
@@ -127,7 +153,7 @@ info:
 
 jhipster:
   clientApp:
-    name: 'backendApp'
+    name: 'tmplBackendApp'
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #   allowed-origins: "http://localhost:8100,http://localhost:9000"
@@ -137,12 +163,12 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: backend@localhost
+    from: tmpl_backend@localhost
   api-docs:
-    default-include-pattern: ${server.servlet.context-path:}/api/.*
-    management-include-pattern: ${server.servlet.context-path:}/management/.*
-    title: Backend API
-    description: Backend API documentation
+    default-include-pattern: ${server.servlet.context-path:}/api/**
+    management-include-pattern: ${server.servlet.context-path:}/management/**
+    title: Tmpl Backend API
+    description: Tmpl Backend API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:

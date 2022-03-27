@@ -15,7 +15,7 @@
 
 spring:
   application:
-    name: backend
+    name: tmpl_backend
   jackson:
     serialization:
       write-durations-as-timestamps: false
@@ -23,6 +23,10 @@ spring:
     host: localhost
   main:
     allow-bean-definition-overriding: true
+    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   messages:
     basename: i18n/messages
   security:
@@ -31,13 +35,13 @@ spring:
       password: test
   task:
     execution:
-      thread-name-prefix: backend-task-
+      thread-name-prefix: tmpl-backend-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: backend-scheduling-
+      thread-name-prefix: tmpl-backend-scheduling-
       pool:
         size: 1
   thymeleaf:
@@ -55,7 +59,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'backendApp'
+    name: 'tmplBackendApp'
   logging:
     # To test json console appender
     use-json-format: false
@@ -68,7 +72,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: Mjg3YTQyODA2MDgxYTY3NzA5Y2E0Y2YyYjgzZmMzOGEwY2RiMWFkZjJmYWFjN2MxNWEzNGQ4YTRiNTBjM2YwMzQ2ZDRjZDJkNjk4OTVkYTA3MGNmNmE5YmYxOTY0YmVkNjAxNTA2MDJkMDBhNDlmMWU4NGUwNjE2MmNlZTM4ODY=
+        base64-secret: Yjk2YzMxZjkyNmUyNGVmYWI5MmYyMTcxMGU2MjJiYjZkN2Q2N2RkNWE1OTM1M2E3M2Q5NTMzMTlhNzlmYWQ1ZGE2MGZiYjU5MTliMWM4OGMxOTVjNGU3MGYzZTkyNzg3YzhlOTFhYmJmYTA4Y2Q3MjBlYjlhYmRjMjgxNWIyYTI=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
 # ===================================================================

@@ -3,7 +3,7 @@ package eu.linuxme.tmpl.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Properties specific to Backend.
+ * Properties specific to Tmpl Backend.
  * <p>
  * Properties are configured in the {@code application.yml} file.
  * See {@link tech.jhipster.config.JHipsterProperties} for a good example.
