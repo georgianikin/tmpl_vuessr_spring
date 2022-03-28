@@ -1,4 +1,6 @@
 import { createApp } from './main'
+import 'bootstrap';
+import 'bootstrap/scss/bootstrap.scss';
 
 const { app, router } = createApp()
 

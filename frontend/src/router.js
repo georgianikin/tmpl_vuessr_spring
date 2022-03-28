@@ -11,8 +11,10 @@ import {
 const routes = [
     {
 	 path: '/',
-     component: () => import('./components/layouts/PortalLayout.vue')
-     //children: []
+     component: () => import('./components/layouts/PortalLayout.vue'),
+     children: [
+		{path: '', component: () => import('./components/portal/Home.vue')},
+	 ]
     },
     {
 	 path: '/admin',
